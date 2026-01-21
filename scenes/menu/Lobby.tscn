@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c8v8o5wcwdn0"]
 
-[ext_resource type="Script" uid="uid://bgp7clgn16cxg" path="res://scripts/ui/lobbymenu.gd" id="1_x0y8v"]
+[ext_resource type="Script" uid="uid://bgp7clgn16cxg" path="res://scripts/menu/lobby_menu.gd" id="1_x0y8v"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -85,7 +85,7 @@ text = "Ready"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-text = "Toggle Status"
+text = "Start Game"
 
 [node name="LeaveBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true

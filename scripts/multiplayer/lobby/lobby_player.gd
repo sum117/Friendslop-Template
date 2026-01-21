@@ -19,6 +19,7 @@ signal info_changed
 	set(value):
 		peer_id = value
 		name = str(peer_id)
+		_apply_multiplayer_authority(peer_id)
 		info_changed.emit()
 
 ## The name of the player. 
@@ -40,34 +41,43 @@ signal info_changed
 		status = value
 		info_changed.emit()
 
-var _synchronizer: MultiplayerSynchronizer
-var _server_synchronizer: MultiplayerSynchronizer
+var _player_sync: MultiplayerSynchronizer
+var _server_sync: MultiplayerSynchronizer
 
-func _enter_tree() -> void:
+func _init() -> void:
 	_setup_synchronizers()
 
 ## Programmatically creates MultiplayerSynchronizers.
 ## This allows the script to function without a pre-made scene.
+## 
+## ARCHITECTURE NOTE: We use two synchronizers to enforce authority:
+## 1. PlayerSynchronizer: Owned by the Peer ID. Only they can change their name/ready status.
+## 2. ServerSynchronizer: Owned by the Server (ID 1). Only the server can change player status.
 func _setup_synchronizers() -> void:
 	# Player-authoritative synchronizer (for name, readiness, etc.)
-	_synchronizer = MultiplayerSynchronizer.new()
-	_synchronizer.name = "PlayerSynchronizer"
-	_synchronizer.set_multiplayer_authority(peer_id)
+	_player_sync = MultiplayerSynchronizer.new()
+	_player_sync.name = "PlayerSynchronizer"
+	_apply_multiplayer_authority(peer_id)
 	
 	var player_config := SceneReplicationConfig.new()
 	player_config.add_property(NodePath(":player_name"))
 	player_config.add_property(NodePath(":is_ready"))
 	
-	_synchronizer.replication_config = player_config
-	add_child(_synchronizer)
+	_player_sync.replication_config = player_config
+	add_child(_player_sync)
 
 	# Server-authoritative synchronizer (for status)
-	_server_synchronizer = MultiplayerSynchronizer.new()
-	_server_synchronizer.name = "ServerSynchronizer"
-	_server_synchronizer.set_multiplayer_authority(1)
+	_server_sync = MultiplayerSynchronizer.new()
+	_server_sync.name = "ServerSynchronizer"
+	_server_sync.set_multiplayer_authority(1)
 	
 	var server_config := SceneReplicationConfig.new()
 	server_config.add_property(NodePath(":status"))
 	
-	_server_synchronizer.replication_config = server_config
-	add_child(_server_synchronizer)
+	_server_sync.replication_config = server_config
+	add_child(_server_sync)
+
+func _apply_multiplayer_authority(id: int) -> void:
+	set_multiplayer_authority(id, false) # recursive=false to protect ServerSynchronizer
+	if _player_sync:
+		_player_sync.set_multiplayer_authority(id)

@@ -1,11 +1,16 @@
 extends GutTest
 
+class MockSceneManager extends SceneManagerCode:
+	var called: int = 0
+
+	func _perform_scene_change(scene: PackedScene) -> void:
+		called += 1
+
 var _scene_manager: SceneManagerCode
 
 func before_each():
 	# Use partial_double so we can stub the scene change method
-	_scene_manager = partial_double(SceneManagerCode).new()
-	stub(_scene_manager, "_perform_scene_change").to_do_nothing()
+	_scene_manager = MockSceneManager.new()
 	
 	# Create a double for LoadingOverlay to verify fade_in/fade_out calls
 	var overlay_double = double(LoadingOverlay).new()
@@ -85,7 +90,7 @@ func test_completes_transition():
 	# This internal logic calls _perform_scene_change
 	await wait_until(func(): return _scene_manager._active_scene_load_id > 0 and _scene_manager.is_stopped(), 2.0)
 	
-	assert_called(_scene_manager._perform_scene_change)
+	assert_eq(_scene_manager.called, 1)
 	
 	# In a real game, the new scene would call mark_scene_as_loaded.
 	# Since we stubbed it, we call it manually to finish the "loading" state.

@@ -6,6 +6,9 @@ extends MultiplayerSynchronizer
 var _handshake: HandshakeRetryTimer
 
 func _enter_tree() -> void:
+	if not replication_config:
+		replication_config = SceneReplicationConfig.new()
+
 	if multiplayer.is_server():
 		public_visibility = false
 	else:

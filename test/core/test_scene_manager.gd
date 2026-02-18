@@ -18,7 +18,7 @@ func after_each():
 	_scene_manager.free()
 
 func test_ignores_same_path():
-	var path = "res://scenes/menu/Lobby.tscn"
+	var path = SceneManagerCode.LOBBY_MENU
 	
 	_scene_manager.start_transition_to(path)
 	
@@ -34,8 +34,8 @@ func test_ignores_same_path():
 	assert_called_count(_scene_manager._loading_overlay.fade_in, 1)
 
 func test_can_overwrite_transition():
-	var path1 = "res://scenes/menu/Lobby.tscn"
-	var path2 = "res://scenes/menu/MainMenu.tscn"
+	var path1 = SceneManagerCode.LOBBY_MENU
+	var path2 = SceneManagerCode.MAIN_MENU
 	
 	_scene_manager.start_transition_to(path1)
 	var initial_id = _scene_manager._active_scene_load_id

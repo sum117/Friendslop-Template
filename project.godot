@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="FriendslopTemplate"
 run/main_scene="uid://kfp8o5wcwdn0"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -21,9 +25,13 @@ PeerManager="*res://scripts/multiplayer/network/peer_manager.gd"
 LobbyManager="*res://scripts/multiplayer/lobby/lobby_manager.gd"
 SceneManager="*res://scripts/core/scene_manager.gd"
 
+[dotnet]
+
+project/assembly_name="FriendslopTemplate"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/inspector_tabs/plugin.cfg")
 
 [input]
 

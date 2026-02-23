@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmtqgpu556ikj"]
+[gd_scene format=3 uid="uid://bmtqgpu556ikj"]
 
 [ext_resource type="Script" uid="uid://du2b5x3tr66kf" path="res://scripts/core/network_level_root.gd" id="1_is44e"]
 [ext_resource type="Script" uid="uid://ds5gkhhfa6y0h" path="res://scripts/multiplayer/replication/handshake_spawner.gd" id="2_lwcv7"]
@@ -40,14 +40,14 @@ func _pressed() -> void:
 	SceneManager.go_to_main_menu()
 "
 
-[node name="NetworkLevelRoot" type="Node"]
+[node name="NetworkLevelRoot" type="Node" unique_id=617929372]
 editor_description = "This node just emits a `player_ready_for_gameplay` signal that we can use to spawn/respond"
 script = ExtResource("1_is44e")
 metadata/_custom_type_script = "uid://du2b5x3tr66kf"
 
-[node name="WorldLevelRoot" type="Node2D" parent="."]
+[node name="WorldLevelRoot" type="Node2D" parent="." unique_id=192445212]
 
-[node name="PlayerSpawner" type="Node" parent="WorldLevelRoot"]
+[node name="PlayerSpawner" type="Node" parent="WorldLevelRoot" unique_id=1270614346]
 script = ExtResource("2_lwcv7")
 spawnables = Dictionary[String, ExtResource("4_oacue")]({
 "player": SubResource("Resource_6y2dm")
@@ -55,63 +55,63 @@ spawnables = Dictionary[String, ExtResource("4_oacue")]({
 spawn_path = NodePath("../PlayerContainer")
 metadata/_custom_type_script = "uid://ds5gkhhfa6y0h"
 
-[node name="RandomPlayerSpawnManager" type="Node" parent="WorldLevelRoot" node_paths=PackedStringArray("spawn_points", "network_level_root", "handshake_spawner")]
+[node name="RandomPlayerSpawnManager" type="Node" parent="WorldLevelRoot" unique_id=849780466 node_paths=PackedStringArray("spawn_points", "network_level_root", "handshake_spawner")]
 script = ExtResource("6_oacue")
 spawn_points = NodePath("../SpawnPoints")
 network_level_root = NodePath("../..")
 handshake_spawner = NodePath("../PlayerSpawner")
 metadata/_custom_type_script = "uid://de5iv1eivkd1b"
 
-[node name="PlayerContainer" type="Node2D" parent="WorldLevelRoot"]
+[node name="PlayerContainer" type="Node2D" parent="WorldLevelRoot" unique_id=469383722]
 
-[node name="SpawnPoints" type="Node2D" parent="WorldLevelRoot"]
+[node name="SpawnPoints" type="Node2D" parent="WorldLevelRoot" unique_id=1878422857]
 
-[node name="SpawnPoint01" type="Marker2D" parent="WorldLevelRoot/SpawnPoints"]
+[node name="SpawnPoint01" type="Marker2D" parent="WorldLevelRoot/SpawnPoints" unique_id=310847200]
 position = Vector2(146, 500)
 gizmo_extents = 32.0
 
-[node name="SpawnPoint02" type="Marker2D" parent="WorldLevelRoot/SpawnPoints"]
+[node name="SpawnPoint02" type="Marker2D" parent="WorldLevelRoot/SpawnPoints" unique_id=927896675]
 position = Vector2(991, 125)
 gizmo_extents = 32.0
 
-[node name="SpawnPoint03" type="Marker2D" parent="WorldLevelRoot/SpawnPoints"]
+[node name="SpawnPoint03" type="Marker2D" parent="WorldLevelRoot/SpawnPoints" unique_id=1405444871]
 position = Vector2(1002, 546)
 gizmo_extents = 32.0
 
-[node name="SpawnPoint04" type="Marker2D" parent="WorldLevelRoot/SpawnPoints"]
+[node name="SpawnPoint04" type="Marker2D" parent="WorldLevelRoot/SpawnPoints" unique_id=2046687994]
 position = Vector2(535, 121)
 gizmo_extents = 32.0
 
-[node name="SpawnPoint05" type="Marker2D" parent="WorldLevelRoot/SpawnPoints"]
+[node name="SpawnPoint05" type="Marker2D" parent="WorldLevelRoot/SpawnPoints" unique_id=1417663999]
 position = Vector2(92, 74)
 gizmo_extents = 32.0
 
-[node name="SpawnPoint06" type="Marker2D" parent="WorldLevelRoot/SpawnPoints"]
+[node name="SpawnPoint06" type="Marker2D" parent="WorldLevelRoot/SpawnPoints" unique_id=53173467]
 position = Vector2(736, 541)
 gizmo_extents = 32.0
 
-[node name="SpawnPoint07" type="Marker2D" parent="WorldLevelRoot/SpawnPoints"]
+[node name="SpawnPoint07" type="Marker2D" parent="WorldLevelRoot/SpawnPoints" unique_id=2049003076]
 position = Vector2(385, 388)
 gizmo_extents = 32.0
 
-[node name="Sprite2D" type="Sprite2D" parent="WorldLevelRoot"]
+[node name="Sprite2D" type="Sprite2D" parent="WorldLevelRoot" unique_id=394417308]
 texture = SubResource("PlaceholderTexture2D_oacue")
 
-[node name="Sprite2D2" type="Sprite2D" parent="WorldLevelRoot"]
+[node name="Sprite2D2" type="Sprite2D" parent="WorldLevelRoot" unique_id=1865642413]
 position = Vector2(1, 646)
 texture = SubResource("PlaceholderTexture2D_oacue")
 
-[node name="Sprite2D3" type="Sprite2D" parent="WorldLevelRoot"]
+[node name="Sprite2D3" type="Sprite2D" parent="WorldLevelRoot" unique_id=1885525073]
 position = Vector2(1150, 645)
 texture = SubResource("PlaceholderTexture2D_oacue")
 
-[node name="Sprite2D4" type="Sprite2D" parent="WorldLevelRoot"]
+[node name="Sprite2D4" type="Sprite2D" parent="WorldLevelRoot" unique_id=1010058411]
 position = Vector2(1154, 2)
 texture = SubResource("PlaceholderTexture2D_oacue")
 
-[node name="WorldCanvas" type="CanvasLayer" parent="."]
+[node name="WorldCanvas" type="CanvasLayer" parent="." unique_id=1940915441]
 
-[node name="CenterContainer" type="CenterContainer" parent="WorldCanvas"]
+[node name="CenterContainer" type="CenterContainer" parent="WorldCanvas" unique_id=466093488]
 custom_minimum_size = Vector2(0, 256)
 anchors_preset = 12
 anchor_top = 1.0
@@ -120,18 +120,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="WorldCanvas/CenterContainer"]
+[node name="ButtonsContainer" type="HBoxContainer" parent="WorldCanvas/CenterContainer" unique_id=1228088664]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="LobbyBtn" type="Button" parent="WorldCanvas/CenterContainer/ButtonsContainer"]
+[node name="LobbyBtn" type="Button" parent="WorldCanvas/CenterContainer/ButtonsContainer" unique_id=1493097130]
 visible = false
 layout_mode = 2
 text = "ADMIN:
 Back to Lobby"
 script = SubResource("GDScript_270oc")
 
-[node name="QuitBtn" type="Button" parent="WorldCanvas/CenterContainer/ButtonsContainer"]
+[node name="QuitBtn" type="Button" parent="WorldCanvas/CenterContainer/ButtonsContainer" unique_id=219049678]
 layout_mode = 2
 text = "Quit"
 script = SubResource("GDScript_oacue")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://du2b5x3tr66kf" path="res://scripts/core/network_level_root.gd" id="1_ajme4"]
 [ext_resource type="Script" uid="uid://ds5gkhhfa6y0h" path="res://scripts/multiplayer/replication/handshake_spawner.gd" id="2_ohv0i"]
-[ext_resource type="Script" uid="uid://cpiu7cm4jfdb2" path="res://scripts/multiplayer/player_spawning/simple_player_spawn_manager.gd" id="3_smxf0"]
+[ext_resource type="Script" uid="uid://de5iv1eivkd1b" path="res://scripts/multiplayer/player_spawning/random_player_spawn_manager.gd" id="3_smxf0"]
 [ext_resource type="PackedScene" uid="uid://c5a57shf1fs2j" path="res://scenes/level/3d/Player3D.tscn" id="4_ohv0i"]
 [ext_resource type="Script" uid="uid://4dcx7yyhvg1" path="res://scripts/multiplayer/replication/spawnable_resource.gd" id="5_sp3d"]
 [ext_resource type="Script" uid="uid://b0qw4fo2ixlou" path="res://scenes/level/3d/spawnable_player_3d.gd" id="6_sp3d"]
@@ -26,17 +26,30 @@ spawnables = Dictionary[String, ExtResource("5_sp3d")]({
 spawn_path = NodePath("../PlayerContainer")
 metadata/_custom_type_script = "uid://ds5gkhhfa6y0h"
 
-[node name="SimplePlayerSpawnManager" type="Node" parent="WorldLevelRoot" unique_id=1083883634 node_paths=PackedStringArray("network_level_root", "handshake_spawner")]
+[node name="RandomPlayerSpawnManager" type="Node" parent="WorldLevelRoot" unique_id=1083883634 node_paths=PackedStringArray("spawn_points", "network_level_root", "handshake_spawner")]
 script = ExtResource("3_smxf0")
+spawn_points = NodePath("../SpawnPoints")
 network_level_root = NodePath("../..")
 handshake_spawner = NodePath("../PlayerSpawner")
-metadata/_custom_type_script = "uid://cpiu7cm4jfdb2"
+metadata/_custom_type_script = "uid://de5iv1eivkd1b"
 
 [node name="PlayerContainer" type="Node3D" parent="WorldLevelRoot" unique_id=1175168314]
 
 [node name="SpawnPoints" type="Node3D" parent="WorldLevelRoot" unique_id=833217782]
 
-[node name="Marker3D" type="Marker3D" parent="WorldLevelRoot/SpawnPoints" unique_id=402052342]
+[node name="SpawnPoint01" type="Marker3D" parent="WorldLevelRoot/SpawnPoints" unique_id=2014229732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -4)
+
+[node name="SpawnPoint02" type="Marker3D" parent="WorldLevelRoot/SpawnPoints" unique_id=1574503493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -4)
+
+[node name="SpawnPoint03" type="Marker3D" parent="WorldLevelRoot/SpawnPoints" unique_id=1670411346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 4)
+
+[node name="SpawnPoint04" type="Marker3D" parent="WorldLevelRoot/SpawnPoints" unique_id=1703288863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 4)
+
+[node name="SpawnPoint05" type="Marker3D" parent="WorldLevelRoot/SpawnPoints" unique_id=816856320]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldLevelRoot" unique_id=1955728392]

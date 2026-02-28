@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cmp8xa431p7w7" path="res://scenes/level/3d/player_3d.gd" id="1_p3d"]
 [ext_resource type="Script" uid="uid://cgjas4oa700yv" path="res://scripts/multiplayer/replication/handshake_synchronizer.gd" id="2_p3d"]
 [ext_resource type="Script" uid="uid://ds3v7myfcnw1x" path="res://scripts/input/game_action_router_3d.gd" id="3_p3d"]
+[ext_resource type="Script" path="res://scenes/level/3d/player_3d_label.gd" id="4_lbl"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fqjrw"]
 
@@ -39,3 +40,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6999999, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1054231569]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049999952, -0.4)
+
+[node name="Player3DLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+billboard = 1
+text = "Player Name"
+font_size = 32
+script = ExtResource("4_lbl")
+smoothing = 0.18

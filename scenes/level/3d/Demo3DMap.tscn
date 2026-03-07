@@ -4,13 +4,48 @@
 [ext_resource type="Script" uid="uid://ds5gkhhfa6y0h" path="res://scripts/multiplayer/replication/handshake_spawner.gd" id="2_ohv0i"]
 [ext_resource type="Script" uid="uid://de5iv1eivkd1b" path="res://scripts/multiplayer/player_spawning/random_player_spawn_manager.gd" id="3_smxf0"]
 [ext_resource type="PackedScene" uid="uid://c5a57shf1fs2j" path="res://scenes/level/3d/Player3D.tscn" id="4_ohv0i"]
+[ext_resource type="Script" uid="uid://c7dqo7n5dyscn" path="res://scenes/level/3d/spawnable_player_3d.gd" id="4_smxf0"]
 [ext_resource type="Script" uid="uid://4dcx7yyhvg1" path="res://scripts/multiplayer/replication/spawnable_resource.gd" id="5_sp3d"]
-[ext_resource type="Script" uid="uid://b0qw4fo2ixlou" path="res://scenes/level/3d/spawnable_player_3d.gd" id="6_sp3d"]
 
-[sub_resource type="Resource" id="Resource_sp3d"]
-script = ExtResource("6_sp3d")
+[sub_resource type="Resource" id="Resource_252hw"]
+script = ExtResource("4_smxf0")
 player_scene = ExtResource("4_ohv0i")
-metadata/_custom_type_script = "uid://b0qw4fo2ixlou"
+metadata/_custom_type_script = "uid://c7dqo7n5dyscn"
+
+[sub_resource type="Gradient" id="Gradient_ohv0i"]
+offsets = PackedFloat32Array(0, 0.49295774, 1)
+colors = PackedColorArray(0.48333794, 0.6493677, 1, 1, 0.2231029, 0.2231029, 0.22310287, 1, 0.0052744895, 0.004332943, 0.015937699, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_smxf0"]
+gradient = SubResource("Gradient_ohv0i")
+fill_from = Vector2(0.2820513, 1)
+fill_to = Vector2(0.34615386, 0)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_252hw"]
+panorama = SubResource("GradientTexture2D_smxf0")
+
+[sub_resource type="Sky" id="Sky_a1hwe"]
+sky_material = SubResource("PanoramaSkyMaterial_252hw")
+
+[sub_resource type="Environment" id="Environment_xcvyy"]
+background_mode = 2
+sky = SubResource("Sky_a1hwe")
+ambient_light_source = 1
+ambient_light_energy = 1.25
+tonemap_mode = 2
+tonemap_agx_white = 10.29
+tonemap_agx_contrast = 1.0
+ssao_enabled = true
+ssao_radius = 0.4
+ssao_intensity = 1.0
+ssao_power = 5.0
+glow_enabled = true
+glow_levels/2 = 0.6
+glow_levels/3 = 0.6
+glow_levels/5 = 6.0
+glow_intensity = 2.0
+glow_strength = 0.45
+glow_bloom = 0.5
 
 [node name="NetworkLevelRoot" type="Node" unique_id=480273431]
 script = ExtResource("1_ajme4")
@@ -21,7 +56,7 @@ metadata/_custom_type_script = "uid://du2b5x3tr66kf"
 [node name="PlayerSpawner" type="Node" parent="WorldLevelRoot" unique_id=671358734]
 script = ExtResource("2_ohv0i")
 spawnables = Dictionary[String, ExtResource("5_sp3d")]({
-"player": SubResource("Resource_sp3d")
+"player": SubResource("Resource_252hw")
 })
 spawn_path = NodePath("../PlayerContainer")
 metadata/_custom_type_script = "uid://ds5gkhhfa6y0h"
@@ -53,7 +88,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 4)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldLevelRoot" unique_id=1955728392]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.7071067, 0, -0.70710677, 0.7071067, 0, 12.5, 0)
+transform = Transform3D(-1, -6.181724e-08, 6.181723e-08, 0, 0.70710677, 0.7071067, -8.742278e-08, 0.70710677, -0.7071067, 0, 12.5, 0)
+layers = 3
+shadow_enabled = true
 
 [node name="Floor" type="CSGBox3D" parent="WorldLevelRoot" unique_id=587757284]
 use_collision = true
@@ -88,3 +125,6 @@ transform = Transform3D(-4.371139e-08, 4.371139e-08, 1, -4.371139e-08, 1, -4.371
 operation = 2
 use_collision = true
 size = Vector3(2, 2.5, 2)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldLevelRoot" unique_id=1713868342]
+environment = SubResource("Environment_xcvyy")
